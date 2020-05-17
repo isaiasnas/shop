@@ -6,8 +6,11 @@
 
 - [shop](https://github.com/isaiasnas/shop)
 
-Projeto **shop** ...
+Projeto **shop** *e-comerce* ...
 [documentação](https://github.com/isaiasnas/shop/blob/master/README.md)
+
+## Frameworks
+- Provider
 
 ## Histórico
 
