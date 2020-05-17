@@ -17,6 +17,10 @@ class CounterProvider extends InheritedWidget {
 
   CounterProvider({Widget child}) : super(child: child);
 
+  static CounterProvider of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<CounterProvider>();
+  }
+
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return true;
