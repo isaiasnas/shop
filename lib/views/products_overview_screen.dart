@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/data/dummy_data.dart';
 import 'package:shop/models/product.dart';
+import 'package:shop/views/product_item.dart';
 
 class ProductOverviewScreen extends StatelessWidget {
   final List<Product> loadedProducts = DUMMY_PRODUCTS;
@@ -14,7 +15,7 @@ class ProductOverviewScreen extends StatelessWidget {
       body: GridView.builder(
         itemCount: loadedProducts.length,
         padding: const EdgeInsets.all(10),
-        itemBuilder: (ctx, index) => Text(loadedProducts[index].title),
+        itemBuilder: (ctx, index) => ProductItem(loadedProducts[index]),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,
