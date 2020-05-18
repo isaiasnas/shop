@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/providers/products.dart';
 import 'package:shop/utils/app_routes.dart';
 import 'package:shop/views/product_detail_screen.dart';
 import 'package:shop/views/products_overview_screen.dart';
@@ -11,7 +13,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(
+      create: (ctx) => Products(),
+      child: MaterialApp(
         title: 'Minha loja',
         theme: ThemeData(
           primarySwatch: Colors.purple,
@@ -20,6 +24,8 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Lato',
         ),
         home: ProductOverviewScreen(),
-        routes: {AppRoutes.PRODUCT_DETAILS: (ctx) => ProductDetailScreen()});
+        routes: {AppRoutes.PRODUCT_DETAILS: (ctx) => ProductDetailScreen()},
+      ),
+    );
   }
 }
