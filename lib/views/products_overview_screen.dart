@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/models/product.dart';
-import 'package:shop/providers/products.dart';
 import 'package:shop/views/product_grid.dart';
 
 enum FilterOptions {
