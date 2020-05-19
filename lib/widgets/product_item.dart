@@ -48,12 +48,14 @@ class ProductItem extends StatelessWidget {
                           onPressed: () => Navigator.of(context).pop(true))
                     ],
                   ),
-                ).then((value) {
-                  if (value) {
-                    Provider.of<Products>(context, listen: false)
-                        .deleteProduct(product.id);
-                  }
-                });
+                ).then(
+                  (value) {
+                    if (value) {
+                      Provider.of<Products>(context, listen: false)
+                          .deleteProduct(product.id);
+                    }
+                  },
+                );
               },
             ),
           ],
