@@ -17,7 +17,7 @@ class Products with ChangeNotifier {
       _items.where((product) => product.isFavorite).toList();
 
   Future<void> addProduct(Product product) async {
-    const url = '';
+    const url = 'https://{}.firebaseio.com/products.json';
 
     final response = await http.post(
       url,
