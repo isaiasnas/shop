@@ -1,7 +1,7 @@
 # custon
 android/key.properties
 constants.dart
-**/constants.dart
+lib/utils/constants.dart
 
 # Miscellaneous
 *.class
