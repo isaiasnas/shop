@@ -11,6 +11,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scaffold = Scaffold.of(context);
     return ListTile(
       title: Text(product.title),
       leading: CircleAvatar(
@@ -49,10 +50,15 @@ class ProductItem extends StatelessWidget {
                     ],
                   ),
                 ).then(
-                  (value) {
+                  (value) async {
                     if (value) {
-                      Provider.of<Products>(context, listen: false)
-                          .deleteProduct(product.id);
+                      try {
+                        await Provider.of<Products>(context, listen: false)
+                            .deleteProduct(product.id);
+                      } catch (error) {
+                        scaffold.showSnackBar(
+                            SnackBar(content: Text(error.toString())));
+                      }
                     }
                   },
                 );
