@@ -1,5 +1,9 @@
 # Projeto - Shop
 
+- 1 na pasta `/lib/util/`
+- 2 renomear o arquivo `constants_desenv.dart` para `constants.dart` e seguir as intruções.
+---
+
 ## SKD - 1.17.1
 
 ### Versão inicial do projeto.
