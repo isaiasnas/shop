@@ -1,6 +1,6 @@
-import 'dart:math';
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:shop/data/dummy_data.dart';
 import 'package:shop/providers/product.dart';
 
@@ -16,14 +16,28 @@ class Products with ChangeNotifier {
   List<Product> get favoriteItems =>
       _items.where((product) => product.isFavorite).toList();
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) async {
+    const url = '';
+
+    final response = await http.post(
+      url,
+      body: json.encode({
+        'title': product.title,
+        'description': product.description,
+        'price': product.price,
+        'imageUrl': product.imageUrl,
+        'isFavorite': product.isFavorite,
+      }),
+    );
+
     _items.add(Product(
-      id: Random().nextDouble().toString(),
+      id: json.decode(response.body)['name'],
       description: product.description,
       title: product.description,
       price: product.price,
       imageUrl: product.imageUrl,
     ));
+
     notifyListeners();
   }
 
