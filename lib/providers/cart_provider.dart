@@ -1,25 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:shop/models/cart_item.dart';
 import 'package:shop/providers/product.dart';
 
-class CartItem {
-  final String id;
-  final String productId;
-  final String title;
-  final int quantity;
-  final double price;
-
-  CartItem({
-    @required this.id,
-    @required this.productId,
-    @required this.title,
-    @required this.quantity,
-    @required this.price,
-  });
-}
-
-class Cart with ChangeNotifier {
+class CartProvider with ChangeNotifier {
   Map<String, CartItem> _items = {};
 
   Map<String, CartItem> get items {

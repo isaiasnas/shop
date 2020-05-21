@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/providers/cart.dart';
-import 'package:shop/providers/orders.dart';
+import 'package:shop/providers/cart_provider.dart';
+import 'package:shop/providers/order_provider.dart';
 import 'package:shop/widgets/cart_item_widget.dart';
 
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Cart cart = Provider.of(context);
+    final CartProvider cart = Provider.of(context);
     final cartItmems = cart.items.values.toList();
 
     return Scaffold(
@@ -65,7 +65,7 @@ class OrderButton extends StatefulWidget {
     @required this.cart,
   }) : super(key: key);
 
-  final Cart cart;
+  final CartProvider cart;
 
   @override
   _OrderButtonState createState() => _OrderButtonState();
@@ -84,7 +84,7 @@ class _OrderButtonState extends State<OrderButton> {
               setState(() {
                 _isLoading = true;
               });
-              await Provider.of<Orders>(context, listen: false)
+              await Provider.of<OrderProvider>(context, listen: false)
                   .addOrder(widget.cart);
               setState(() {
                 _isLoading = false;

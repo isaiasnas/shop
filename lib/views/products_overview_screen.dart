@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop/providers/cart.dart';
-import 'package:shop/providers/products.dart';
+import 'package:shop/providers/cart_provider.dart';
+import 'package:shop/providers/product_provider.dart';
 import 'package:shop/utils/app_routes.dart';
 import 'package:shop/views/product_grid.dart';
 import 'package:shop/widgets/app_drawer.dart';
@@ -58,7 +58,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
               ),
             ],
           ),
-          Consumer<Cart>(
+          Consumer<CartProvider>(
             child: IconButton(
               icon: Icon(Icons.shopping_cart),
               onPressed: () {

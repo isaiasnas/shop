@@ -1,24 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:shop/providers/cart.dart';
+import 'package:shop/models/cart_item.dart';
+import 'package:shop/models/order.dart';
+import 'package:shop/providers/cart_provider.dart';
 import 'package:shop/utils/constants.dart';
 
-class Order {
-  final String id;
-  final double total;
-  final List<CartItem> products;
-  final DateTime date;
-
-  Order({
-    this.id,
-    this.total,
-    this.products,
-    this.date,
-  });
-}
-
-class Orders with ChangeNotifier {
+class OrderProvider with ChangeNotifier {
   final String _baseUrl = '${Constants.BASE_API_URL}/orders';
   List<Order> _items = [];
 
@@ -58,7 +46,7 @@ class Orders with ChangeNotifier {
     return Future.value();
   }
 
-  Future<void> addOrder(Cart cart) async {
+  Future<void> addOrder(CartProvider cart) async {
     final date = DateTime.now();
     final response = await http.post('$_baseUrl.json',
         body: json.encode({
