@@ -84,7 +84,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
       _isLoading = true;
     });
 
-    final products = Provider.of<Products>(context, listen: false);
+    final products = Provider.of<ProductProvider>(context, listen: false);
 
     try {
       if (_formData['id'] == null) {

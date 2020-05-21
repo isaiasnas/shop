@@ -5,7 +5,7 @@ import 'package:shop/exceptions/http_expecption.dart';
 import 'package:shop/providers/product.dart';
 import 'package:shop/utils/constants.dart';
 
-class Products with ChangeNotifier {
+class ProductProvider with ChangeNotifier {
   final String _baseUrl = '${Constants.BASE_API_URL}/products';
 
   List<Product> _items = [];
