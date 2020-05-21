@@ -26,7 +26,7 @@ class _OrderWidgetState extends State<OrderWidget> {
               DateFormat('dd/MM/yyyy hh:mm').format(widget.order.date),
             ),
             trailing: IconButton(
-              icon: Icon(Icons.expand_more),
+              icon: Icon(!_expanded ? Icons.expand_more : Icons.expand_less),
               onPressed: () {
                 setState(() {
                   _expanded = !_expanded;
@@ -37,20 +37,23 @@ class _OrderWidgetState extends State<OrderWidget> {
           if (_expanded)
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              height: (widget.order.products.length * 25.0) + 1,
+              height: (widget.order.products.length * 25.0) + 15,
               child: ListView(
                 children: widget.order.products
                     .map(
                       (product) => Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
-                            product.title,
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                          Flexible(
+                            child: Text(
+                              product.title,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
                           ),
                           Text(
-                            '${product.quantity}x R\$${product.price}',
+                            '${product.quantity}x R\$${product.price.toStringAsFixed(2)}',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

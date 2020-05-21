@@ -64,13 +64,14 @@ class CartItemWidget extends StatelessWidget {
             leading: CircleAvatar(
               child: Padding(
                 child: FittedBox(
-                  child: Text('${cartItem.price}'),
+                  child: Text('${cartItem.price.toStringAsFixed(2)}'),
                 ),
                 padding: EdgeInsets.all(5),
               ),
             ),
             title: Text(cartItem.title),
-            subtitle: Text('Total:R\$ ${cartItem.price * cartItem.quantity}'),
+            subtitle: Text(
+                'Total:R\$ ${(cartItem.price * cartItem.quantity).toStringAsFixed(2)}'),
             trailing: Text('${cartItem.quantity}x'),
           ),
         ),
