@@ -12,12 +12,9 @@ import 'package:shop/views/product_form_screen.dart';
 import 'package:shop/views/products_overview_screen.dart';
 import 'package:shop/views/products_screen.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
