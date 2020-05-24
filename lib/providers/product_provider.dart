@@ -10,30 +10,50 @@ class ProductProvider with ChangeNotifier {
 
   List<Product> _items = [];
 
+  ProductProvider(this.authToken, this.userId, this._items);
+
   List<Product> get items {
     return [..._items];
   }
+
+  final String authToken;
+  final String userId;
 
   int get itemsCount => _items.length;
 
   List<Product> get favoriteItems =>
       _items.where((product) => product.isFavorite).toList();
 
-  Future<void> loadProduct() async {
-    final response = await http.get('$_baseUrl.json');
+  Future<void> loadProduct([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
+    final response =
+        await http.get('$_baseUrl.json?auth=$authToken&$filterString');
     Map<String, dynamic> data = json.decode(response.body);
     _items.clear();
+
+    final String _url =
+        '${Constants.BASE_API_URL}/userFavorite/$userId.json?auth=$authToken';
+
+    final favoriteResponse = await http.get(_url);
+    final favoriteDate = json.decode(favoriteResponse.body);
+
+    //print(favoriteDate);
+
     if (data != null) {
       data.forEach(
         (productId, product) {
           _items.add(
             Product(
-                id: productId,
-                description: product['description'],
-                title: product['description'],
-                price: product['price'],
-                imageUrl: product['imageUrl'],
-                isFavorite: product['isFavorite']),
+              id: productId,
+              description: product['description'],
+              title: product['description'],
+              price: product['price'],
+              imageUrl: product['imageUrl'],
+              isFavorite: favoriteDate == null
+                  ? false
+                  : favoriteDate[productId] ?? false,
+            ),
           );
         },
       );
@@ -44,13 +64,14 @@ class ProductProvider with ChangeNotifier {
 
   Future<void> addProduct(Product product) async {
     final response = await http.post(
-      '$_baseUrl.json',
+      '$_baseUrl.json?auth=$authToken',
       body: json.encode({
         'title': product.title,
         'description': product.description,
         'price': product.price,
         'imageUrl': product.imageUrl,
-        'isFavorite': product.isFavorite,
+        'creatorId': userId,
+        //'isFavorite': product.isFavorite,
       }),
     );
 
@@ -72,7 +93,7 @@ class ProductProvider with ChangeNotifier {
     if (index >= 0) {
       //update server
       await http.patch(
-        '$_baseUrl/${product.id}.json',
+        '$_baseUrl/${product.id}.json?auth=$authToken',
         body: json.encode({
           'title': product.title,
           'description': product.description,
@@ -93,8 +114,9 @@ class ProductProvider with ChangeNotifier {
       _items.remove(product);
       notifyListeners();
 
-      final response = await http.delete('$_baseUrl/${product.id}.json');
-      print(response);
+      final response =
+          await http.delete('$_baseUrl/${product.id}.json?auth=$authToken');
+      //print(response);
       if (response.statusCode >= 400) {
         _items.insert(index, product);
         notifyListeners();

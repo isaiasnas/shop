@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/providers/auth.dart';
 import 'package:shop/utils/app_routes.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -33,6 +35,17 @@ class AppDrawer extends StatelessWidget {
             title: Text('Gerenciar Produtos'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(AppRoutes.PRODUCTS);
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Sair'),
+            onTap: () {
+              //Navigator.of(context).pushReplacementNamed(AppRoutes.PRODUCTS);
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacementNamed(AppRoutes.AUTH);
+              Provider.of<Auth>(context, listen: false).logout();
             },
           ),
         ],

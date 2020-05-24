@@ -12,8 +12,8 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final products = Provider.of<ProductProvider>(context);
-    final productItems = products.items;
+    //final products = Provider.of<ProductProvider>(context);
+    //final productItems = products.items;
     return Scaffold(
       appBar: AppBar(
         title: Text('Gerenciar Produtos'),
@@ -26,17 +26,30 @@ class ProductsScreen extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: RefreshIndicator(
-        onRefresh: () => _refreshProducts(context),
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: ListView.builder(
-            itemCount: products.itemsCount,
-            itemBuilder: (ctx, index) => Column(
-              children: <Widget>[ProductItem(productItems[index]), Divider()],
-            ),
-          ),
-        ),
+      body: FutureBuilder(
+        future: _refreshProducts(context),
+        builder: (ctx, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : RefreshIndicator(
+                    onRefresh: () => _refreshProducts(context),
+                    child: Consumer<ProductProvider>(
+                      builder: (ctx, productsData, _) => Padding(
+                        padding: EdgeInsets.all(8),
+                        child: ListView.builder(
+                          itemCount: productsData.itemsCount,
+                          itemBuilder: (ctx, index) => Column(
+                            children: <Widget>[
+                              ProductItem(productsData.items[index]),
+                              Divider()
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
       ),
     );
   }
