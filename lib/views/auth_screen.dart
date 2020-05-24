@@ -61,7 +61,7 @@ class AuthScreen extends StatelessWidget {
                         ],
                       ),
                       child: Text(
-                        'MyShop',
+                        'Compras',
                         style: TextStyle(
                           color:
                               Theme.of(context).accentTextTheme.headline6.color,
@@ -216,7 +216,7 @@ class _AuthCardState extends State<AuthCard> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: InputDecoration(labelText: 'Senha'),
                   obscureText: true,
                   controller: _passwordController,
                   validator: (value) {
@@ -248,13 +248,14 @@ class _AuthCardState extends State<AuthCard> {
                   CircularProgressIndicator()
                 else
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       FlatButton(
                         child: Text(
                             '${_authMode == AuthMode.Login ? 'CADASTRAR' : 'LOGAR'}'),
                         onPressed: _switchAuthMode,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         textColor: Theme.of(context).primaryColor,
                       ),
@@ -264,10 +265,10 @@ class _AuthCardState extends State<AuthCard> {
                             : 'CONFIRMAR'),
                         onPressed: _submit,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 8.0),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                         color: Theme.of(context).primaryColor,
                         textColor:
                             Theme.of(context).primaryTextTheme.button.color,
