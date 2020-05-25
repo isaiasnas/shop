@@ -125,11 +125,13 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             onPressed: () {
               _saveForm();
             },
-          )
+          ),
         ],
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
           : Padding(
               padding: const EdgeInsets.all(15),
               child: Form(

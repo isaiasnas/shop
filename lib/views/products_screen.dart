@@ -19,37 +19,34 @@ class ProductsScreen extends StatelessWidget {
         title: Text('Gerenciar Produtos'),
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.PRODUCT_FORM);
-              })
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.PRODUCT_FORM);
+            },
+          ),
         ],
       ),
       drawer: AppDrawer(),
       body: FutureBuilder(
         future: _refreshProducts(context),
-        builder: (ctx, snapshot) =>
-            snapshot.connectionState == ConnectionState.waiting
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : RefreshIndicator(
-                    onRefresh: () => _refreshProducts(context),
-                    child: Consumer<ProductProvider>(
-                      builder: (ctx, productsData, _) => Padding(
-                        padding: EdgeInsets.all(8),
-                        child: ListView.builder(
-                          itemCount: productsData.itemsCount,
-                          itemBuilder: (ctx, index) => Column(
-                            children: <Widget>[
-                              ProductItem(productsData.items[index]),
-                              Divider()
-                            ],
-                          ),
-                        ),
-                      ),
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(child: CircularProgressIndicator())
+            : RefreshIndicator(
+                onRefresh: () => _refreshProducts(context),
+                child: Consumer<ProductProvider>(
+                  builder: (ctx, productsData, _) => Padding(
+                    padding: EdgeInsets.all(8),
+                    child: ListView.builder(
+                      itemCount: productsData.itemsCount,
+                      itemBuilder: (ctx, index) => Column(children: <Widget>[
+                        ProductItem(productsData.items[index]),
+                        Divider(),
+                      ]),
                     ),
                   ),
+                ),
+              ),
       ),
     );
   }

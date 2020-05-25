@@ -5,7 +5,6 @@ import 'package:shop/providers/cart_provider.dart';
 import 'package:shop/providers/order_provider.dart';
 import 'package:shop/providers/product_provider.dart';
 import 'package:shop/utils/app_routes.dart';
-import 'package:shop/views/auth/login_screen.dart';
 import 'package:shop/views/auth_screen.dart';
 import 'package:shop/views/cart_screen.dart';
 import 'package:shop/views/order_screen.dart';
@@ -52,8 +51,6 @@ class MyApp extends StatelessWidget {
                           ? SplashScreen()
                           : AuthScreen()),
           routes: {
-            //AppRoutes.LOGIN: (ctx) => LoginScreen(),
-
             AppRoutes.HOME: (ctx) => ProductOverviewScreen(),
             AppRoutes.PRODUCT_DETAILS: (ctx) => ProductDetailScreen(),
             AppRoutes.CART: (ctx) => CartScreen(),

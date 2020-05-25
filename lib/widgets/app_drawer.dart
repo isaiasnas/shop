@@ -42,7 +42,6 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Sair'),
             onTap: () {
-              //Navigator.of(context).pushReplacementNamed(AppRoutes.PRODUCTS);
               Navigator.of(context).pop();
               Navigator.of(context).pushReplacementNamed(AppRoutes.AUTH);
               Provider.of<Auth>(context, listen: false).logout();

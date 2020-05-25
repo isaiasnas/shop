@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shop/exceptions/http_expecption.dart';
 import 'package:shop/utils/constants.dart';
+import 'package:shop/utils/http_expecption.dart';
 
 class Auth with ChangeNotifier {
   String _token;
